@@ -41,7 +41,7 @@ def accept():
     button2.pack(anchor=tk.N)
     # 別ウィンドウで画像表示
     global pwin
-    pwin = tk.Tk() #Toplevel=別ウインドウ作成
+    pwin = tk.Tk()
     pwin.title("一般的衛生管理マニュアル")
     pwin.geometry("630x800+400+0")
     canvas = tk.Canvas(pwin, bg="grey", width=630, height=800)
@@ -49,14 +49,14 @@ def accept():
     global img #グローバル宣言。ローカルオブジェクトは消滅する為。
     img = Image.open("HACCP_ippan.png")
     img = img.resize(size=(630, 800))
-    global photo #グローバル宣言。ローカルオブジェクトは消滅する為。
+    global photo
     photo = ImageTk.PhotoImage(img, master=pwin)
     canvas.place(x=0, y=0)
     canvas.create_image(320, 400, image=photo) #画像位置(x, y)
 
-#冷蔵庫の温度チェックする画面設定
+#冷蔵庫の温度チェックする画面
 def temp():
-    win = tk.Toplevel() #Toplevel=別ウインドウ作成
+    win = tk.Toplevel()
     win.title("一般的衛生管理")
     win.geometry("300x200+1030+250")
     label = ttk.Label(win, text="\n②庫内温度の確認\n")
@@ -83,7 +83,7 @@ def temp_get():
 
 #二次感染をチェックする画面
 def check_infect():
-    win = tk.Toplevel() #Toplevel=別ウインドウ作成
+    win = tk.Toplevel()
     win.title("一般的衛生管理")
     win.geometry("300x200+1030+250")
     label = ttk.Label(win, text="\n③-1交差汚染・二時汚染の防止\n")
@@ -93,8 +93,9 @@ def check_infect():
     button2 = ttk.Button(win, text="否", command=lambda:[ng3_1(), win.destroy(), tool_disinfect()])
     button2.pack(anchor=tk.N)
 
+#器具の洗浄をチェックする画面
 def tool_disinfect():
-    win = tk.Toplevel() #Toplevel=別ウインドウ作成
+    win = tk.Toplevel()
     win.title("一般的衛生管理")
     win.geometry("300x200+1030+250")
     label = ttk.Label(win, text="\n③-2器具等の洗浄・消毒・殺菌\n")
@@ -103,9 +104,10 @@ def tool_disinfect():
     button1.pack(anchor=tk.N)
     button2 = ttk.Button(win, text="否", command=lambda:[ng3_2(), win.destroy(), toilet_disinfect()])
     button2.pack(anchor=tk.N)
-    
+
+#トイレ洗浄をチェックする画面 
 def toilet_disinfect():
-    win = tk.Toplevel() #Toplevel=別ウインドウ作成
+    win = tk.Toplevel()
     win.title("一般的衛生管理")
     win.geometry("300x200+1030+250")
     label = ttk.Label(win, text="\n③-3トイレの洗浄・消毒\n")
@@ -117,7 +119,7 @@ def toilet_disinfect():
 
 #従業員の健康チェックする画面
 def manage_health():
-    win = tk.Toplevel() #Toplevel=別ウインドウ作成
+    win = tk.Toplevel()
     win.title("一般的衛生管理")
     win.geometry("300x200+1030+250")
     label = ttk.Label(win, text="\n④-1従業員の健康管理等\n")
@@ -129,7 +131,7 @@ def manage_health():
 
 #手洗いをチェックする画面
 def wash_hand():
-    win = tk.Toplevel() #Toplevel=別ウインドウ作成
+    win = tk.Toplevel()
     win.title("一般的衛生管理")
     win.geometry("300x200+1030+250")
     label = ttk.Label(win, text="\n④-2手洗いの実施\n")
@@ -141,7 +143,7 @@ def wash_hand():
 
 #チェック者の氏名入力画面
 def name():
-    win = tk.Toplevel() #Toplevel=別ウインドウ作成
+    win = tk.Toplevel()
     win.title("一般的衛生管理")
     win.geometry("300x200+1030+250")
     label1 = ttk.Label(win, text="\n日々チェック\n")
@@ -161,7 +163,7 @@ def name_get():
 
 # 特記事項入力の関数
 def memo_input():
-    win = tk.Toplevel() #Toplevel=別ウインドウ作成
+    win = tk.Toplevel()
     win.title("一般的衛生管理")
     win.geometry("300x200+1030+250")
     label = ttk.Label(win, text="\n特記事項メモ\n")
@@ -180,7 +182,7 @@ def memo_get():
 
 # Wチェック者の氏名入力画面
 def wcheck_name():
-    win = tk.Toplevel() #Toplevel=別ウインドウ作成
+    win = tk.Toplevel()
     win.title("一般的衛生管理")
     win.geometry("300x200+1030+250")
     label = ttk.Label(win, text="\n確認者の名前を入力\n")
@@ -198,7 +200,7 @@ def w_name_get():
 
 # チェックが完了したことを表示する画面
 def complete():
-    win = tk.Toplevel() #Toplevel=別ウインドウ作成
+    win = tk.Toplevel()
     win.title("一般的衛生管理")
     win.geometry("300x200+550+250")
     label = ttk.Label(win, text="\nチェック完了\n\nデータベースへの保存完了\n")
@@ -251,7 +253,6 @@ date = now.strftime("%Y/%m/%d")
 time1 = now.strftime("%H:%M:%S")
 
 # DB作成関数
-# 日付を遡ってチェックする場合f"{ymd}"を"yyyy/mm/dd"に変更
 def create_database():
     df = pd.DataFrame([[f"{date}" ,f"{time1}", f"{n1}" ,f"{fr_temp},{fz_temp}", f"{n3_1}", f"{n3_2}", f"{n3_3}", f"{n4_1}", f"{n4_2}", f"{check_name}", f"{memo}", f"{Wcheck_name}"]],
                     columns = ["実施日", "実施時間", "①原材料の受入確認", "②庫内温度の確認(冷蔵庫, 冷凍庫)(℃)", "③-1交差汚染・二時汚染の防止", "③-2器具等の洗浄・消毒・殺菌", "③-3トイレの洗浄・消毒", "④-1従業員の健康管理等", "④-2手洗いの実施", "日々チェック(一般)", "特記事項(一般)", "確認者(一般)"]
